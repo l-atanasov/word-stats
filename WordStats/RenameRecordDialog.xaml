@@ -1,0 +1,23 @@
+﻿<Window x:Class="WordStats.RenameRecordDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Преименуване на запис" Height="130" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Content="Име на записа:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="0" Margin="5,5,0,0"/>
+        <TextBox x:Name="recordName" Height="23" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="5,5,5,0"/>
+        <Grid HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Stretch" Margin="0,10,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Откажи" Grid.Column="0" Margin="0,0,5,0" Click="OnCancelClicked" />
+            <Button Content="Запази" Grid.Column="1" Margin="5,0,0,0" FontWeight="Bold" Click="OnOkClicked"  />
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,65 @@
+﻿<Window x:Class="WordStats.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WordStats" Height="350" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Margin="5,5,5,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right">
+                
+                <Button Grid.Row="0" Content="Нов запис..." Width="Auto" Margin="0,0,0,5" Click="OnAddRecordClick" />
+                <Button x:Name="globalStatsButton" Grid.Row="0" Content="Глоб. статистика" Width="Auto" Margin="5,0,0,5" Click="showGlobalStats" Visibility="Collapsed" />
+            </StackPanel>
+           
+            <ListView x:Name="recordsList" Grid.Row="1" SelectionMode="Single" SelectionChanged="OnSelectedRecordChanged" >
+                <ListView.Resources>
+                    <ContextMenu x:Key="itemContextMenu">
+                        <MenuItem Header="Преименувай" Click="RenameRecord" />
+                        <MenuItem Header="Изтрий" Click="OnDeleteExam" />
+                    </ContextMenu>
+                </ListView.Resources>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="ContextMenu" Value="{StaticResource itemContextMenu}" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
+        <Grid Grid.Column="1" Margin="5,5,5,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label x:Name="selectedRecordLabel" Visibility="Collapsed" Grid.Row="0" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" />
+            <TextBox x:Name="inputTextTextBox" TextWrapping="Wrap" AcceptsReturn="True" Text="TextBox" VerticalScrollBarVisibility="Auto" Grid.Row="1" Visibility="Collapsed"  />
+            <DataGrid x:Name="statisticsGrid" Grid.Row="1" Visibility="Visible" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Word}" CanUserReorder="False" Header="Дума" IsReadOnly="True" Width="*" SortDirection="Ascending"/>
+                    <DataGridTextColumn Binding="{Binding DisplayedCountWithPercentage}" CanUserReorder="False" Header="Брой" IsReadOnly="True" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel x:Name="buttonsPanel" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,0" Visibility="Collapsed">
+                <Button x:Name="showTextButton" Content="Текст" Margin="5,0,0,0" Click="ShowText" />
+                <Button x:Name="showStatsButton" Content="Статистика" Margin="5,0,0,0" Click="ShowStats" />
+                <Button x:Name="editButton" Content="Редактирай" Margin="5,0,0,0" Click="EditContent" />
+                <Button x:Name="cancelButton" Content="Откажи" Margin="5,0,0,0" Click="CancelEditing" />
+                <Button x:Name="saveButton" Content="Запази" Margin="5,0,0,0" Click="SaveContent" />
+            </StackPanel>
+        </Grid>
+        
+    </Grid>
+</Window>
